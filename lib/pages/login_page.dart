@@ -1,9 +1,15 @@
 import 'package:catalog_codepur/utils/routes.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String name = "";
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -19,7 +25,7 @@ class LoginPage extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                'Welcome',
+                'Welcome $name',
                 style: TextStyle(
                   fontSize: 29,
                   fontWeight: FontWeight.bold,
@@ -35,6 +41,14 @@ class LoginPage extends StatelessWidget {
                         hintText: "Enter username",
                         labelText: "UserName",
                       ),
+                      onChanged: (value) {
+                        setState(() {
+                          name = value;
+                        });
+                      },
+                    ),
+                    SizedBox(
+                      height: 20,
                     ),
                     TextFormField(
                       obscureText: true,
@@ -47,11 +61,16 @@ class LoginPage extends StatelessWidget {
                     SizedBox(
                       height: 40,
                     ),
-                    ElevatedButton(onPressed: (){
-                      Navigator.pushNamed(context, MyRoutes.homeRoute);
-                    },
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, MyRoutes.homeRoute);
+                      },
                       child: Text('Login'),
-                      style: TextButton.styleFrom(minimumSize: Size(150, 40)))
+                      style: TextButton.styleFrom(
+                        minimumSize: Size(150, 40),
+                      ),
+                    )
+
                   ],
                 ),
               ),
